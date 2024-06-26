@@ -1,970 +1,514 @@
-  <!DOCTYPE html>
+<!--
+=========================================================
+* Argon Dashboard 2 - v2.0.4
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnyAI - Danh Trình</title>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css"></script>
-    <link rel="icon" type="image/x-icon" href="favicon.jpg">
-    <meta name="description" content="Sản phẩm do Danh Trình tạo ra, thuộc Việt Nam">
-    <meta name="keywords" content="ai, anyai, tool, vietnam, danh trình, chiêm thành tấn, any">
-
-    <meta property="og:url" content="https://anyai.netlify.app">
-    <meta property="og:title" content="AnyAI by Danh Trình - AnyAI.Netlify.App">
-    <meta property="og:description" content="Sản phẩm do Danh Trình tạo ra, thuộc Việt Nam">
-    <meta property="og:image" content="favicon.jpg">
-<!-- TrustBox script -->
-<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-<!-- End TrustBox script -->
-    <link rel='manifest' href='/manifest.json'>
-    <meta name='mobile-web-app-capable' content='yes'>
-    <meta name='apple-mobile-web-app-capable' content='yes'>
-    <meta name='application-name' content='AnyAI+'><meta name='apple-mobile-web-app-title' content='AnyAI+'>
-    <meta name='msapplication-starturl' content='/'>
-    <!-- stylesheet -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
-    />
-    <!-- script -->
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js"></script>
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;1,800&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        font-family: Rubik;
-      }
-      /*css for color*/
-      .bg-[#000000e5] {
-        background-color: #000000e5;
-      }
-      .backdrop-blur {
-        backdrop-filter: blur(8px);
-        background-color: #ffffff89;
-      }
-      ...
-    </style>
-    <script src="data.js">
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    Argon Dashboard 2 by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
-<body class="bg-white text-gray-800">
 
-        <style>
-
-        .jump-up {
-            animation: jumpUp 0.4s ease-out forwards;
-        }
-
-        @keyframes jumpUp {
-            from {
-                transform: translateY(100%);
-            }
-        }
-
-        function hideGenerateButton() {
-            const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
-            if (isLoggedIn && isLoggedIn.username === 'testuser') {
-                const usageKey = `usage_${isLoggedIn.username}_${new Date().toISOString().split('T')[0]}`;
-                let storedUsageDate = localStorage.getItem('usageDate');
-                let usageCount = 0;
-
-                if (storedUsageDate !== new Date().toISOString().split('T')[0]) {
-                    localStorage.setItem("usageDate", new Date().toISOString().split('T')[0]);
-                    localStorage.setItem(usageKey, 0);
-                } else {
-                    usageCount = parseInt(localStorage.getItem(usageKey)) || 0;
-                }
-
-                if (usageCount >= 3) {
-                    // Hide the Generate Image button and reload the page
-                    const generateButtons = document.querySelectorAll('button[data-role="generate-button"]');
-                    generateButtons.forEach(button => button.style.display = 'none');
-                    location.reload(); 
-                }
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
-
-
-
-                                            .messageBox {
-  width: fit-content;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(12px);
-  padding: 0 15px;
-  border-radius: 10px;
-  border: 1px solid rgb(63, 63, 63);
-}
-.messageBox:focus-within {
-  border: 1px solid rgb(110, 110, 110);
-}
-.fileUploadWrapper {
-  width: fit-content;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#file {
-  display: none;
-}
-.fileUploadWrapper label {
-  cursor: pointer;
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.fileUploadWrapper label svg {
-  height: 18px;
-}
-.fileUploadWrapper label svg path {
-  transition: all 0.3s;
-}
-.fileUploadWrapper label svg circle {
-  transition: all 0.3s;
-}
-.fileUploadWrapper label:hover svg path {
-  stroke: #fff;
-}
-.fileUploadWrapper label:hover svg circle {
-  stroke: #fff;
-  fill: #3c3c3c;
-}
-.fileUploadWrapper label:hover .tooltip {
-  display: block;
-  opacity: 1;
-}
-.tooltip {
-  position: absolute;
-  top: -40px;
-  display: none;
-  opacity: 0;
-  color: white;
-  font-size: 10px;
-  text-wrap: nowrap;
-  background-color: #000;
-  padding: 6px 10px;
-  border: 1px solid #3c3c3c;
-  border-radius: 5px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
-  transition: all 0.3s;
-}
-#messageInput {
-  width: 200px;
-  height: 100%;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  padding-left: 10px;
-  color: white;
-}
-#messageInput:focus ~ #sendButton svg path,
-#messageInput:valid ~ #sendButton svg path {
-  fill: #3c3c3c;
-  stroke: white;
-}
-
-#sendButton {
-  width: fit-content;
-  height: 100%;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-#sendButton svg {
-  height: 18px;
-  transition: all 0.3s;
-}
-#sendButton svg path {
-  transition: all 0.3s;
-}
-#sendButton:hover svg path {
-  fill: #3c3c3c;
-  stroke: white;
-}
-
-    </style>
-</head>
-<body class="bg-white text-gray-800" onload="checkLogin()">
-    <div data-dialog-backdrop="dialog-xlll" data-dialog-backdrop-close="true"
-      class="pointer-events-none fixed  z-50 grid h-screen w-screen place-items-center bg-white bg-opacity-10 opacity-0 backdrop-blur-sm transition-opacity duration-300">
-      <div data-dialog="dialog-xlll"
-        class="relative m-4 w-3/4 min-w-[75%] max-w-[75%] rounded-2xl bg-white font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased shadow-2xl">
-        <div
-          class="flex items-center p-4 font-sans text-2xl antialiased font-semibold leading-snug shrink-0 text-blue-gray-900">
-          Tạo hình ảnh AnyAI Im.4
-        </div>
-        <button data-ripple-dark="true" data-dialog-close="true"
-            class="px-6 py-3 mr-1 font-sans text-xs font-bold text-red-500 uppercase transition-all rounded-lg middle none center hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            Cancel
-          </button>
-        <div class="relative p-4 font-sans text-base antialiased font-light leading-relaxed border-t border-b border-t-blue-gray-100 border-b-blue-gray-100 text-blue-gray-500">
-       <h2 class="text-xl font-bold mb-4">AI Photo Generator</h2>
-            <form id="image-generator-form" class="space-y-4">
-                <div>
-                    <label for="prompt" class="block text-sm font-medium text-gray-700">Prompt</label>
-                    <input type="text" id="prompt" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm" required>
-                </div>
-                <div id="error-message" class="text-red-500 hidden"></div>
-                <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white rounded-md">Generate Image</button>
-            </form>
-            <div id="spinner" class="hidden mt-4 border-t-4 border-b-4 border-indigo-500 rounded-full w-12 h-12 animate-spin"></div>
-            <div id="generated-image" class="mt-4 rounded-2xl"></div>
-            <!-- Fullscreen View Modal -->
-            <div id="fullscreen-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden z-50">
-              <div class="relative bg-black rounded-lg">
-                <img id="fullscreen-img" src="" alt="Full Screen Image" class="w-full h-auto">
-                <a id="download-btn" class="absolute bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md">Download</a>
-                <button onclick="closeFullscreenModal()" class="absolute top-4 right-4 text-white bg-red-500 p-2 rounded-full">X</button>
-              </div>
-            </div>
-        </div>
-        
-          
-        </div>
-      </div>
-    </div>
-  <!--modal tool chat-->
-    <div data-dialog-backdrop="dialog-xl" data-dialog-backdrop-close="true"
-      class="pointer-events-none fixed  z-50 grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300">
-      <div data-dialog="dialog-xl"
-        class="relative m-4 w-3/4 min-w-[75%] max-w-[75%] rounded-lg bg-white font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased shadow-2xl">
-        <div
-          class="flex items-center p-4 font-sans text-2xl antialiased font-semibold leading-snug shrink-0 text-blue-gray-900">
-          Its a simple dialog.
-        </div>
-        <div class="px-4 w-full flex-grow flex flex-col">
-      
-      <div id="chatbox" class="flex flex-col items-start bg-white max-h-96 p-4 rounded-lg overflow-y-auto flex-grow mb-2"></div>
-     <div class="messageBox fixed z-50 bottom-2 mx-auto block">
-  <div class="fileUploadWrapper">
-    <label for="file">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 337 337">
-        <circle
-          stroke-width="20"
-          stroke="#6c6c6c"
-          fill="none"
-          r="158.5"
-          cy="168.5"
-          cx="168.5"
-        ></circle>
-        <path
-          stroke-linecap="round"
-          stroke-width="25"
-          stroke="#6c6c6c"
-          d="M167.759 79V259"
-        ></path>
-        <path
-          stroke-linecap="round"
-          stroke-width="25"
-          stroke="#6c6c6c"
-          d="M79 167.138H259"
-        ></path>
-      </svg>
-      <span class="tooltip">Add an image</span>
-    </label>
-    <input type="file" id="file" name="file" />
-  </div>
-  <input required="" placeholder="Message..." type="text" id="messageInput" />
-  <button id="sendButton">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
-      <path
-        fill="none"
-        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-      ></path>
-      <path
-        stroke-linejoin="round"
-        stroke-linecap="round"
-        stroke-width="33.67"
-        stroke="#6c6c6c"
-        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-      ></path>
-    </svg>
-  </button>
-</div>
-
-    </div>
-  </div>
-        <div class="flex flex-wrap items-center justify-end p-4 shrink-0 text-blue-gray-500">
-          <button data-ripple-dark="true" data-dialog-close="true"
-            class="px-6 py-3 mr-1 font-sans text-xs font-bold text-red-500 uppercase transition-all rounded-lg middle none center hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            Cancel
-          </button>
-          <button data-ripple-light="true" data-dialog-close="true"
-            class="middle none center rounded-lg bg-gradient-to-tr from-green-600 to-green-400 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            Confirm
-          </button>
-        </div>
-      </div>
-    </div>
-    <!-- Login Modal -->
-    <div id="login-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg mr-6 ml-6">
-          
-      <div class="flex flex-col gap-4 p-6">
-        <h4
-          class="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-          Đăng nhập sử dụng AnyAI
-        </h4>
-        <p class="block mb-3 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-          Nhập email và mật khẩu của bạn để đăng nhập.
-        </p>
-        <h6
-          class="block -mb-2 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-inherit">
-          Email của bạn
-        </h6>
-        <div class="relative h-11 w-full min-w-[200px]">
-          <input id="username"
-            class="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-            placeholder="Tên đăng nhập của bạn..." />
-          
-        </div>
-        <h6
-          class="block -mb-2 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-inherit">
-          Mật khẩu của bạn
-        </h6>
-        <div class="relative h-11 w-full min-w-[200px]">
-          <input id="password"
-            class="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-            placeholder="Mật khẩu của bạn..." />
-          
-        </div>
-        <div class="-ml-2.5 -mt-3">
-          <div class="inline-flex items-center">
-            <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="remember">
-              
-          </div>
-        </div>
-      </div>
-      <div class="p-6 pt-0">
-        <button onclick="validateLogin()"
-    class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-    type="button"
-    data-ripple-light="true"
-    >
-    Đăng nhập</button>
-        <p class="flex justify-center mt-4 font-sans text-sm antialiased font-light leading-normal text-inherit">
-          Don&apos;t have an account?
-          <a href="danhtrinh.ofc@gmail.com"
-            class="block ml-1 font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900">
-            Đăng ký Demo
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
-   
+<body class="g-sidenav-show  bg-gray-100 virtual-reality">
+  <div>
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full p-4 z-50 backdrop-blur shadow-2xl shadow-red flex justify-between items-center">
-        <h1 class="text-xl font-bold">AnyAI</h1>
-      
-    </nav>
-
-    <!-- Landing Pages -->
-    <div id="page1" class="h-screen pt-3">
-
-
-<section class="w-full px-8 text-gray-700 bg-white">
-    <div class="container flex flex-col flex-wrap items-center justify-between  mx-auto md:flex-row max-w-7xl">
-        
-</section>
-
-<!-- Section 2 -->
-<section class="px-2 py-32 bg-white md:px-0">
-  <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
-    <div class="flex flex-wrap items-center sm:-mx-3">
-      <div class="w-full md:w-1/2 md:px-3">
-        <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-            <span class="block xl:inline">AnyAI</span>
-            <span class="block text-indigo-600 xl:inline">Công cụ AI đa vụ.</span>
-          </h1>
-          <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">AnyAI là một công cụ được phát triển bởi Danh Trình bao gồm 5 công cụ AI và 2 công cụ thường.</p>
-          <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-            <a href="#_" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
-              Try It Free
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
-              Learn More
-            </a>
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl  mt-3 mx-3 bg-primary" id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Virtual Reality</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">Virtual Reality</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" placeholder="Type here...">
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="w-full md:w-1/2">
-        <div class="w-full h-auto overflow-hidden rounded-2xl shadow-xl sm:rounded-xl">
-            <img src="https://i.imgur.com/skGDIwo.png">
-          </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 3 -->
-<section class="w-full bg-white pt-7 pb-7 md:pt-20 md:pb-24">
-    <div class="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row max-w-7xl lg:px-16">
-
-        <!-- Image -->
-        <div class="box-border relative w-full max-w-md px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10">
-            <img src="https://cdn.devdojo.com/images/december2020/productivity.png" class="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 ">
-        </div>
-
-        <!-- Content -->
-        <div class="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
-            <h2 class="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-                Boost Productivity
-            </h2>
-            <p class="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
-                Build an atmosphere that creates productivity in your organization and your company culture.
-            </p>
-            <ul class="p-0 m-0 leading-6 border-0 border-gray-300">
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full"><span class="text-sm font-bold">✓</span></span> Maximize productivity and growth
-                </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full"><span class="text-sm font-bold">✓</span></span> Speed past your competition
-                </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full"><span class="text-sm font-bold">✓</span></span> Learn the top techniques
-                </li>
-            </ul>
-        </div>
-        <!-- End  Content -->
-    </div>
-    <div class="box-border flex flex-col items-center content-center px-8 mx-auto mt-2 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-16">
-
-        <!-- Content -->
-        <div class="box-border w-full text-black border-solid md:w-1/2 md:pl-6 xl:pl-32">
-            <h2 class="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-                Automated Tasks
-            </h2>
-            <p class="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-10 lg:text-lg">
-                Save time and money with our revolutionary services. We are the leaders in the industry.
-            </p>
-            <ul class="p-0 m-0 leading-6 border-0 border-gray-300">
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full"><span class="text-sm font-bold">✓</span></span> Automated task management workflow
-                </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full"><span class="text-sm font-bold">✓</span></span> Detailed analytics for your data
-                </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-yellow-300 rounded-full"><span class="text-sm font-bold">✓</span></span> Some awesome integrations
-                </li>
-            </ul>
-        </div>
-        <!-- End  Content -->
-
-        <!-- Image -->
-        <div class="box-border relative w-full max-w-md px-4 mt-10 mb-4 text-center bg-no-repeat bg-contain border-solid md:mt-0 md:max-w-none lg:mb-0 md:w-1/2">
-            <img src="https://cdn.devdojo.com/images/december2020/settings.png" class="pl-4 sm:pr-10 xl:pl-10 lg:pr-32">
-        </div>
-    </div>
-</section>
-
-<!-- Section 4 -->
-<section class="py-20 bg-gray-50">
-  <div class="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
-    <div class="flex flex-wrap items-center -mx-3">
-      <div class="order-1 w-full px-3 lg:w-1/2 lg:order-0">
-        <div class="w-full lg:max-w-md">
-          <h2 class="mb-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl font-heading">Jam-packed with all the tools you need to succeed!</h2>
-          <p class="mb-4 font-medium tracking-tight text-gray-400 xl:mb-6">It's never been easier to build a business of your own. Our tools will help you with the following:</p>
-          <ul>
-            <li class="flex items-center py-2 space-x-4 xl:py-3">
-              <svg class="w-8 h-8 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-              <span class="font-medium text-gray-500">Faster Processing and Delivery</span>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Sign In</span>
+              </a>
             </li>
-            <li class="flex items-center py-2 space-x-4 xl:py-3">
-              <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-              <span class="font-medium text-gray-500">Out of the Box Tracking and Monitoring</span>
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                </div>
+              </a>
             </li>
-            <li class="flex items-center py-2 space-x-4 xl:py-3">
-              <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-              <span class="font-medium text-gray-500">100% Protection and Security for Your App</span>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-bell cursor-pointer"></i>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New message</span> from Laur
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <title>credit-card</title>
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                              <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(453.000000, 454.000000)">
+                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          Payment successfully completed
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
       </div>
-      <div class="w-full px-3 mb-12 lg:w-1/2 order-0 lg:order-1 lg:mb-0"><img class="mx-auto sm:max-w-sm lg:max-w-full" src="https://cdn.devdojo.com/images/november2020/feature-graphic.png" alt="feature image"></div>
+    </nav>
+    <!-- End Navbar -->
+  </div>
+  <div class="border-radius-xl mt-4 mx-4 position-relative" style="background-image: url('../assets/img/vr-bg.jpg') ; background-size: cover;">
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+      <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
+          <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+          <span class="ms-1 font-weight-bold">Argon Dashboard 2</span>
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/dashboard.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/tables.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Tables</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/billing.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Billing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../pages/virtual-reality.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-app text-info text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Virtual Reality</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/rtl.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">RTL</span>
+            </a>
+          </li>
+          <li class="nav-item mt-3">
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/profile.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/sign-in.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sign In</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="../pages/sign-up.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-collection text-info text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Up</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidenav-footer mx-3 ">
+        <div class="card card-plain shadow-none" id="sidenavCard">
+          <img class="w-50 mx-auto" src="../assets/img/illustrations/icon-documentation.svg" alt="sidebar_illustration">
+          <div class="card-body text-center p-3 w-100 pt-0">
+            <div class="docs-info">
+              <h6 class="mb-0">Need help?</h6>
+              <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard" target="_blank" class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
+        <a class="btn btn-primary btn-sm mb-0 w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+      </div>
+    </aside>
+    <main class="main-content mt-1 border-radius-lg">
+      <div class="section min-vh-85 position-relative transform-scale-0 transform-scale-md-7">
+        <div class="container">
+          <div class="row pt-10">
+            <div class="col-lg-1 col-md-1 pt-5 pt-lg-0 ms-lg-5 text-center">
+              <a href="javascript:;" class="avatar avatar-md border-0 d-block mb-2" data-bs-toggle="tooltip" data-bs-placement="left" title="My Profile">
+                <img class="border-radius-lg" alt="Image placeholder" src="../assets/img/team-1.jpg">
+              </a>
+              <button class="btn btn-white border-radius-lg p-2 mt-0 mt-md-2 d-block mx-2 mx-md-0" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Home">
+                <i class="fas fa-home p-2"></i>
+              </button>
+              <button class="btn btn-white border-radius-lg p-2 d-block" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Search">
+                <i class="fas fa-search p-2"></i>
+              </button>
+              <button class="btn btn-white border-radius-lg p-2 d-block ms-2 ms-md-0" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Minimize">
+                <i class="fas fa-ellipsis-h p-2"></i>
+              </button>
+            </div>
+            <div class="col-lg-8 col-md-11">
+              <div class="d-flex">
+                <div class="me-auto">
+                  <h1 class="display-1 font-weight-bold mb-0">12°C</h1>
+                  <h6 class="text-uppercase mb-0 ms-1">Cloudy</h6>
+                </div>
+                <div class="ms-auto">
+                  <img class="w-50 float-end mt-md-n5" src="../assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-lg-4 col-md-4">
+                  <div class="card move-on-hover overflow-hidden">
+                    <div class="card-body">
+                      <div class="d-flex">
+                        <h6 class="mb-0 me-3">08:00</h6>
+                        <h6 class="mb-0">Synk up with Mark
+                          <small class="text-secondary font-weight-normal">Hangouts</small>
+                        </h6>
+                      </div>
+                      <hr class="horizontal dark">
+                      <div class="d-flex">
+                        <h6 class="mb-0 me-3">09:30</h6>
+                        <h6 class="mb-0">Gym <br />
+                          <small class="text-secondary font-weight-normal">World Class</small>
+                        </h6>
+                      </div>
+                      <hr class="horizontal dark">
+                      <div class="d-flex">
+                        <h6 class="mb-0 me-3">11:00</h6>
+                        <h6 class="mb-0">Design Review<br />
+                          <small class="text-secondary font-weight-normal">Zoom</small>
+                        </h6>
+                      </div>
+                    </div>
+                    <a href="javascript:;" class="bg-gray-100 w-100 text-center py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Show More">
+                      <i class="fas fa-chevron-down text-primary"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 mt-4 mt-sm-0">
+                  <div class="card bg-gradient-dark move-on-hover">
+                    <div class="card-body">
+                      <div class="d-flex">
+                        <h5 class="mb-0 text-white">To Do</h5>
+                        <div class="ms-auto">
+                          <h1 class="text-white text-end mb-0 mt-n2">7</h1>
+                          <p class="text-sm mb-0 text-white">items</p>
+                        </div>
+                      </div>
+                      <p class="text-white mb-0">Shopping</p>
+                      <p class="mb-0 text-white">Meeting</p>
+                    </div>
+                    <a href="javascript:;" class="w-100 text-center py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Show More">
+                      <i class="fas fa-chevron-down text-white"></i>
+                    </a>
+                  </div>
+                  <div class="card move-on-hover mt-4">
+                    <div class="card-body">
+                      <div class="d-flex">
+                        <p class="mb-0">Emails (21)</p>
+                        <a href="javascript:;" class="ms-auto" data-bs-toggle="tooltip" data-bs-placement="top" title="Check your emails">
+                          Check
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 mt-4 mt-sm-0">
+                  <div class="card card-background card-background-mask-primary move-on-hover align-items-start">
+                    <div class="cursor-pointer">
+                      <div class="full-background" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2370&q=80')"></div>
+                      <div class="card-body">
+                        <h5 class="text-white mb-0">Some Kind Of Blues</h5>
+                        <p class="text-white text-sm">Deftones</p>
+                        <div class="d-flex mt-5">
+                          <button class="btn btn-outline-white rounded-circle p-2 mb-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Prev">
+                            <i class="fas fa-backward p-2"></i>
+                          </button>
+                          <button class="btn btn-outline-white rounded-circle p-2 mx-2 mb-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Pause">
+                            <i class="fas fa-play p-2"></i>
+                          </button>
+                          <button class="btn btn-outline-white rounded-circle p-2 mb-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Next">
+                            <i class="fas fa-forward p-2"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card move-on-hover mt-4 mb-4 mb-md-0 mt-md-4">
+                    <div class="card-body">
+                      <div class="d-flex">
+                        <p class="my-auto">Messages</p>
+                        <div class="ms-auto">
+                          <div class="avatar-group">
+                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="2 New Messages">
+                              <img alt="Image placeholder" src="../assets/img/team-1.jpg">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="1 New Message">
+                              <img alt="Image placeholder" src="../assets/img/team-2.jpg">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="13 New Messages">
+                              <img alt="Image placeholder" src="../assets/img/team-3.jpg">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="7 New Messages">
+                              <img alt="Image placeholder" src="../assets/img/team-4.jpg">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer pt-3  ">
+    <div class="container-fluid">
+      <div class="row align-items-center justify-content-lg-between">
+        <div class="col-lg-6 mb-lg-0 mb-4">
+          <div class="copyright text-center text-sm text-muted text-lg-start">
+            © <script>
+              document.write(new Date().getFullYear())
+            </script>,
+            made with <i class="fa fa-heart"></i> by
+            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+            for a better web.
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+      <i class="fa fa-cog py-2"> </i>
+    </a>
+    <div class="card shadow-lg">
+      <div class="card-header pb-0 pt-3 ">
+        <div class="float-start">
+          <h5 class="mt-3 mb-0">Argon Configurator</h5>
+          <p>See our dashboard options.</p>
+        </div>
+        <div class="float-end mt-4">
+          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+            <i class="fa fa-close"></i>
+          </button>
+        </div>
+        <!-- End Toggle Button -->
+      </div>
+      <hr class="horizontal dark my-1">
+      <div class="card-body pt-sm-3 pt-0 overflow-auto">
+        <!-- Sidebar Backgrounds -->
+        <div>
+          <h6 class="mb-0">Sidebar Colors</h6>
+        </div>
+        <a href="javascript:void(0)" class="switch-trigger background-color">
+          <div class="badge-colors my-2 text-start">
+            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+          </div>
+        </a>
+        <!-- Sidenav Type -->
+        <div class="mt-3">
+          <h6 class="mb-0">Sidenav Type</h6>
+          <p class="text-sm">Choose between 2 different sidenav types.</p>
+        </div>
+        <div class="d-flex">
+          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
+          <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">Dark</button>
+        </div>
+        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+        <!-- Navbar Fixed -->
+        <div class="d-flex my-3">
+          <h6 class="mb-0">Navbar Fixed</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+          </div>
+        </div>
+        <hr class="horizontal dark my-sm-4">
+        <div class="mt-2 mb-5 d-flex">
+          <h6 class="mb-0">Light / Dark</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+          </div>
+        </div>
+        <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard">Free Download</a>
+        <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard">View documentation</a>
+        <div class="w-100 text-center">
+          <a class="github-button" href="https://github.com/creativetimofficial/argon-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
+          <h6 class="mt-3">Thank you for sharing!</h6>
+          <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- Section 5 -->
-<section class="flex items-center justify-center py-20 bg-white min-w-screen">
-    <div class="px-16 bg-white">
-        <div class="container flex flex-col items-start mx-auto lg:items-center">
-            <p class="relative flex items-start justify-start w-full text-lg font-bold tracking-wider text-purple-500 uppercase lg:justify-center lg:items-center">Don't just take our word for it</p>
-
-
-            <h2 class="relative flex items-start justify-start w-full max-w-3xl text-5xl font-bold lg:justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="absolute right-0 hidden w-12 h-12 -mt-2 -mr-16 text-gray-200 lg:inline-block" viewBox="0 0 975.036 975.036">
-                <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z">
-                </path>
-            </svg>
-                See what others are saying</h2>
-                <div class="block w-full h-0.5 max-w-lg mt-6 bg-purple-100 rounded-full"></div>
-
-            <div class="items-center justify-center w-full mt-12 mb-4 lg:flex">
-                <div class="flex flex-col items-start justify-start w-full h-auto mb-12 lg:w-1/3 lg:mb-0">
-                    <div class="flex items-center justify-center">
-                        <div class="w-16 h-16 mr-4 overflow-hidden bg-gray-200 rounded-full">
-                            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1700&amp;q=80" class="object-cover w-full h-full">
-                        </div>
-                        <div class="flex flex-col items-start justify-center">
-                            <h4 class="font-bold text-gray-800">John Doe</h4>
-                            <p class="text-gray-600">CEO of Something</p>
-                        </div>
-                    </div>
-                    <blockquote class="mt-8 text-lg text-gray-500">"This is a no-brainer if you want to take your business to the next level. If you are looking for the ultimate toolset, this is it!"</blockquote>
-                </div>
-                <div class="flex flex-col items-start justify-start w-full h-auto px-0 mx-0 mb-12 border-l border-r border-transparent lg:w-1/3 lg:mb-0 lg:px-8 lg:mx-8 lg:border-gray-200">
-                    <div class="flex items-center justify-center">
-                        <div class="w-16 h-16 mr-4 overflow-hidden bg-gray-200 rounded-full">
-                            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2547&amp;q=80" class="object-cover w-full h-full">
-                        </div>
-                        <div class="flex flex-col items-start justify-center">
-                            <h4 class="font-bold text-gray-800">Jane Doe</h4>
-                            <p class="text-gray-600">CTO of Business</p>
-                        </div>
-                    </div>
-                    <blockquote class="mt-8 text-lg text-gray-500">"Thanks for creating this service. My life is so much
-                        easier.
-                        Thanks for making such a great product."</blockquote>
-                </div>
-                <div class="flex flex-col items-start justify-start w-full h-auto lg:w-1/3">
-                    <div class="flex items-center justify-center">
-                        <div class="w-16 h-16 mr-4 overflow-hidden bg-gray-200 rounded-full">
-                            <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1256&amp;q=80" class="object-cover w-full h-full">
-                        </div>
-                        <div class="flex flex-col items-start justify-center">
-                            <h4 class="font-bold text-gray-800">John Smith</h4>
-                            <p class="text-gray-600">Creator of Stuff</p>
-                        </div>
-                    </div>
-                    <blockquote class="mt-8 text-lg text-gray-500">"Packed with awesome content and exactly what I was
-                        looking
-                        for. I would highly recommend this to anyone."</blockquote>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section 6 -->
-<section class="box-border py-8 leading-7 text-gray-900 bg-white border-0 border-gray-200 border-solid sm:py-12 md:py-16 lg:py-24">
-    <div class="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4">
-        <div class="flex flex-col items-center leading-7 text-center text-gray-900">
-            <h2 class="box-border m-0 text-3xl font-semibold leading-tight tracking-tight text-black border-solid sm:text-4xl md:text-5xl">
-                Pricing Options
-            </h2>
-            <p class="box-border mt-4 text-2xl leading-normal text-gray-900 border-solid">
-                We've got a plan for companies of any size
-            </p>
-        </div>
-        <div class="grid max-w-md mx-auto mt-6 overflow-hidden leading-7 text-gray-900 border border-b-4 border-gray-300 border-blue-600 rounded-xl md:max-w-lg lg:max-w-none sm:mt-10 lg:grid-cols-3">
-            <div class="box-border px-4 py-8 mb-6 text-center bg-white border-solid lg:mb-0 sm:px-4 sm:py-8 md:px-8 md:py-12 lg:px-10">
-                <h3 class="m-0 text-2xl font-semibold leading-tight tracking-tight text-black border-0 border-solid sm:text-3xl md:text-4xl">
-                    Basic
-                </h3>
-                <p class="mt-3 leading-7 text-gray-900 border-0 border-solid">
-                    The basic plan is a good fit for smaller teams and startups
-                </p>
-                <div class="flex items-center justify-center mt-6 leading-7 text-gray-900 border-0 border-solid sm:mt-8">
-                    <p class="box-border m-0 text-6xl font-semibold leading-normal text-center border-0 border-gray-200">
-                        $19
-                    </p>
-                    <p class="box-border my-0 ml-4 mr-0 text-xs text-left border-0 border-gray-200">
-                        per user <span class="block">per month</span>
-                    </p>
-                </div>
-
-                <button class="inline-flex items-center justify-center w-full py-3 mt-6 font-sans text-sm leading-none text-center text-blue-600 no-underline bg-transparent border border-b-2 border-blue-600 rounded-md cursor-pointer hover:bg-blue-600 hover:border-blue-600 hover:text-white sm:text-base sm:mt-8 md:text-lg">
-                    Select Plan
-                </button>
-            </div>
-            <div class="box-border px-4 py-8 mb-6 text-center bg-gray-100 border border-gray-300 border-solid lg:mb-0 sm:px-4 sm:py-8 md:px-8 md:py-12 lg:px-10">
-                <h3 class="m-0 text-2xl font-semibold leading-tight tracking-tight text-black border-0 border-solid sm:text-3xl md:text-4xl">
-                    Plus
-                </h3>
-                <p class="mt-3 leading-7 text-gray-900 border-0 border-solid">
-                    The plus plan is a good fit for medium-size to larger companies
-                </p>
-                <div class="flex items-center justify-center mt-6 leading-7 text-gray-900 border-0 border-solid sm:mt-8">
-                    <p class="box-border m-0 text-6xl font-semibold leading-normal text-center border-0 border-gray-200">
-                        $39
-                    </p>
-                    <p class="box-border my-0 ml-4 mr-0 text-xs text-left border-0 border-gray-200">
-                        per user <span class="block">per month</span>
-                    </p>
-                </div>
-                <button class="inline-flex items-center justify-center w-full py-3 mt-6 font-sans text-sm leading-none text-center text-white no-underline bg-blue-600 border-b-4 border-blue-700 rounded cursor-pointer hover:text-white sm:text-base sm:mt-8 md:text-lg">
-                    Select Plan
-                </button>
-            </div>
-            <div class="box-border px-4 py-8 text-center bg-white border-solid sm:px-4 sm:py-8 md:px-8 md:py-12 lg:px-10">
-                <h3 class="m-0 text-2xl font-semibold leading-tight tracking-tight text-black border-0 border-solid sm:text-3xl md:text-4xl">
-                    Pro
-                </h3>
-                <p class="mt-3 leading-7 text-gray-900 border-0 border-solid">
-                    The pro plan is a good fit for larger and enterprise companies.
-                </p>
-                <div class="flex items-center justify-center mt-6 leading-7 text-gray-900 border-0 border-solid sm:mt-8">
-                    <p class="box-border m-0 text-6xl font-semibold leading-normal text-center border-0 border-gray-200">
-                        $59
-                    </p>
-                    <p class="box-border my-0 ml-4 mr-0 text-xs text-center border-0 border-gray-200">
-                        per user <span class="block">per month</span>
-                    </p>
-                </div>
-                <button class="inline-flex items-center justify-center w-full py-3 mt-6 font-sans text-sm leading-none text-center text-blue-600 no-underline bg-transparent border border-b-2 border-blue-600 rounded cursor-pointer hover:bg-blue-600 hover:border-blue-600 hover:text-white sm:text-base sm:mt-8 md:text-lg">
-                    Select Plan
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section 7 -->
-<section class="bg-white">
-    <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
-        <nav class="flex flex-wrap justify-center -mx-5 -my-2">
-            <div class="px-5 py-2">
-                <a href="#" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    About
-                </a>
-            </div>
-            <div class="px-5 py-2">
-                <a href="#" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Blog
-                </a>
-            </div>
-            <div class="px-5 py-2">
-                <a href="#" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Team
-                </a>
-            </div>
-            <div class="px-5 py-2">
-                <a href="#" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Pricing
-                </a>
-            </div>
-            <div class="px-5 py-2">
-                <a href="#" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Contact
-                </a>
-            </div>
-            <div class="px-5 py-2">
-                <a href="#" class="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Terms
-                </a>
-            </div>
-        </nav>
-        <div class="flex justify-center mt-8 space-x-6">
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-                <span class="sr-only">Facebook</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-                <span class="sr-only">Instagram</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-                <span class="sr-only">Twitter</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-                </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-                <span class="sr-only">GitHub</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-                <span class="sr-only">Dribbble</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-        <p class="mt-8 text-base leading-6 text-center text-gray-400">
-            © 2021 SomeCompany, Inc. All rights reserved.
-        </p>
-    </div>
-</section>
-
-
-      
-    </div>
-    <div id="page2" class="h-screen pt-20 hidden">Explore AnyAI - Page 2</div>
-    <div id="page3" class="h-screen pt-20 hidden">Discover AnyAI - Page 3</div>
-    <div id="page4" class="h-screen pt-20 hidden">
-        <h2 class="text-3xl font-bold text-center mb-10">AI Tools</h2>
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="https://i.imgur.com/u0a3GJR.gif" alt="AI Tool Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold">Im.4 AnyAI</h3>
-                    <p class="text-gray-600 mb-2">Tạo ảnh bằng lời nhắc của AI.</p>
-                    <p class="text-gray-600 text-sm">Được xuất bản trên: <span class="text-gray-800">05-4-2024</span></p>
-                    <p class="text-gray-600 text-sm">By: <span class="text-gray-800">Danh Trình</span></p>
-                    <button data-ripple-light="true" data-dialog-target="dialog-xlll"
-      class="select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-      Truy cập 
-    </button>
-                </div>
-            </div>
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="https://cdn.dribbble.com/users/1373613/screenshots/5442947/media/6daa0ef3613f1204dca69abf3592a37f.gif" alt="AI Tool Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold">Code Generator</h3>
-                    <p class="text-gray-600 mb-2">AI that writes code for you.</p>
-                    <p class="text-gray-600 text-sm">Published on: <span class="text-gray-800">2023-09-21</span></p>
-                    <p class="text-gray-600 text-sm">By: <span class="text-gray-800">John Smith</span></p>
-                     <button data-ripple-light="true" data-dialog-target="dialog-xl"
-      class="select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-      Open Dialog XL
-    </button>
-                </div>
-            </div>
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="https://i.imgur.com/u0a3GJR.gif" alt="AI Tool Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold">AI Chatbot</h3>
-                    <p class="text-gray-600 mb-2">Interact with AI chatbots.</p>
-                    <p class="text-gray-600 text-sm">Published on: <span class="text-gray-800">2023-08-15</span></p>
-                    <p class="text-gray-600 text-sm">By: <span class="text-gray-800">Alice Johnson</span></p>
-                    <button data-role="generate-button" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md">Use</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="page5" class="h-screen pt-20 hidden">
-    <h2 class="text-center">User Information</h2>
-    <div id="user-info" class="text-center mt-4 text-gray-800 hidden">
-        <div>
-            <img id="user-avatar" src="" alt="Avatar" class="w-32 h-32 mx-auto rounded-full">
-            <p><strong>Username:</strong> <span id="info-username"></span></p>
-            <p><strong>Full Name:</strong> <span id="info-fullname"></span></p>
-            <p><strong>Gender:</strong> <span id="info-gender"></span></p>
-            <p><strong>Country:</strong> <span id="info-country"></span></p>
-            <p><strong>Social:</strong> <a data-ripple-light="true" type="button" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" id="info-social" href="" target="_blank">Liên kết</a></p>
-        </div>
-    </div>
-    <button onclick="deleteCookies()" 
-        data-ripple-light="true"
-        class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md">Delete Cookies</button>
-    <button onclick="logout()" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-md">Logout</button>
-        <!-- TrustBox widget - Review Collector -->
-<div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="667a46c1df3459dd465311cc" data-style-height="52px" data-style-width="100%">
-  <a href="https://www.trustpilot.com/review/anyai.netlify.app" target="_blank" rel="noopener">Trustpilot</a>
-</div>
-<!-- End TrustBox widget -->
-        </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    
-
-<div class="fixed z-40 mr-4 h-16 max-w-lg mx-auto backdrop-blur bg-[#000000e5] border border-gray-200 rounded-full bottom-4 dark:bg-gray-700 dark:border-gray-600" style="width: 100%;">
-    <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-        <button onclick="showPage(1)" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-6 h-6 mb-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" id="Home-3--Streamline-Core" height="48" width="48"><desc>Home 3 Streamline Icon: https://streamlinehq.com</desc><g id="home-3--home-house-roof-shelter"><path id="Union" fill="#454545" d="M25.15837714285714 2.164878857142857c-0.6554057142857143 -0.600792 -1.6613485714285714 -0.600792 -2.3167542857142855 0L3.381987428571428 20.00286857142857C2.319325714285714 20.976994285714284 1.7142857142857142 22.352365714285714 1.7142857142857142 23.793942857142856V41.14285714285714c0 2.8402285714285713 2.3025257142857143 5.142857142857142 5.142857142857142 5.142857142857142h34.285714285714285c2.8402285714285713 0 5.142857142857142 -2.302628571428571 5.142857142857142 -5.142857142857142V23.793942857142856c0 -1.4415771428571427 -0.6051428571428571 -2.816948571428571 -1.6676571428571427 -3.791074285714286L25.15837714285714 2.164878857142857Z" stroke-width="1"></path><path id="Intersect" fill="#bdbdbd" d="M27.428571428571427 46.285714285714285V34.285714285714285c0 -1.8935314285714284 -1.53504 -3.4285714285714284 -3.4285714285714284 -3.4285714285714284s-3.4285714285714284 1.53504 -3.4285714285714284 3.4285714285714284v12h6.857142857142857Z" stroke-width="1"></path></g></svg>
-            <span class="sr-only">Home</span>
-        </button>
-        <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Home
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button onclick="showPage(2)" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-1  dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path fill="#454545" d="M11.074 4 8.442.408A.95.95 0 0 0 7.014.254L2.926 4h8.148ZM9 13v-1a4 4 0 0 1 4-4h6V6a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1v-2h-6a4 4 0 0 1-4-4Z"/>
-                <path fill="#454545"d="M19 10h-6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1Zm-4.5 3.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM12.62 4h2.78L12.539.41a1.086 1.086 0 1 0-1.7 1.352L12.62 4Z"/>
-            </svg>
-            <span class="sr-only">Wallet</span>
-        </button>
-        <div id="tooltip-wallet" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Wallet
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <div class="flex items-center justify-center">
-            <button onclick="showPage(3)" 
-              data-ripple-light="true"
-              class="align-middle select-none  font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-4 rounded-full bg-gray-900 text-white shadow-md shadow-gray-900/10  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none cursor-not-allowed "
-    type="button">
-                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-                <span class="sr-only">New item</span>
-            </button>
-        </div>
-        <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Create new item
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button onclick="showPage(4)" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-6 h-6 mb-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" id="Dashboard-3--Streamline-Core" height="14" width="14"><desc>Dashboard 3 Streamline Icon: https://streamlinehq.com</desc><g id="dashboard-3--app-application-dashboard-home-layout-vertical"><path id="Union" fill="#454545" fill-rule="evenodd" d="M1.5 0.5c-0.552285 0 -1 0.447715 -1 1v6c0 0.55229 0.447715 1 1 1h4c0.55229 0 1 -0.44771 1 -1v-6c0 -0.552285 -0.44771 -1 -1 -1h-4Zm6 1c0 -0.552285 0.44772 -1 1 -1h4c0.5523 0 1 0.447715 1 1v2.01c0 0.55228 -0.4477 1 -1 1h-4c-0.55228 0 -1 -0.44772 -1 -1V1.5Zm0 5c0 -0.55228 0.44772 -1 1 -1h4c0.5523 0 1 0.44772 1 1v6c0 0.5523 -0.4477 1 -1 1h-4c-0.55228 0 -1 -0.4477 -1 -1v-6Zm-7 3.99c0 -0.55229 0.447715 -1.00001 1 -1.00001h4c0.55229 0 1 0.44772 1 1.00001v2.01c0 0.5523 -0.44771 1 -1 1h-4c-0.552285 0 -1 -0.4477 -1 -1v-2.01Z" clip-rule="evenodd" stroke-width="1"></path></g></svg>
-            <span class="sr-only">Settings</span>
-        </button>
-        <div id="tooltip-settings" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Settings
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button onclick="showPage(5)" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-6 h-6 mb-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" id="User-Nft-Profile-Picture-1--Streamline-Core" height="14" width="14"><desc>User Nft Profile Picture 1 Streamline Icon: https://streamlinehq.com</desc><g id="user-nft-profile-picture-1"><path id="Union" fill="#454545" fill-rule="evenodd" d="M13.6299 7.76309c0.2782 -0.47071 0.2782 -1.05547 0 -1.52618l-2.6591 -4.5C10.701 1.2802 10.2099 1 9.67945 1H4.32071c-0.53048 0 -1.02151 0.2802 -1.29139 0.73691l-2.65909 4.5c-0.2781463 0.47071 -0.2781454 1.05547 0.000001 1.52618L3.02932 12.2631c0.26988 0.4567 0.76091 0.7369 1.29139 0.7369h5.35874c0.53045 0 1.02155 -0.2802 1.29135 -0.7369l2.6591 -4.50001Z" clip-rule="evenodd" stroke-width="1"></path><path id="Union_2" fill="#bdbdbd" fill-rule="evenodd" d="M9 5.5c0 1.10457 -0.89543 2 -2 2s-2 -0.89543 -2 -2 0.89543 -2 2 -2 2 0.89543 2 2Zm-2 3c2.03089 0 3.7476 1.34536 4.3074 3.1935l-0.3366 0.5696c-0.2699 0.4567 -0.7609 0.7369 -1.2914 0.7369H4.32066c-0.53048 0 -1.02151 -0.2802 -1.29139 -0.7369l-0.33664 -0.5697C3.25249 9.84532 4.96914 8.5 7 8.5Z" clip-rule="evenodd" stroke-width="1"></path></g></svg>
-            <span class="sr-only">Profile</span>
-        </button>
-        <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Profile
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-    </div>
-</div>
-<script src="im-4.js"></script>
-    <script>
-      
-
-        // Show the selected page and apply pulsating effect
-        function showPage(pageNumber) {
-            createPulsatingEffect();
-            for (let i = 1; i <= 5; i++) {
-                const page = document.getElementById(`page${i}`);
-                page.classList.add('hidden');
-                page.classList.remove('jump-up');
-            }
-            const newPage = document.getElementById(`page${pageNumber}`);
-            newPage.classList.remove('hidden');
-            newPage.classList.add('jump-up');
-
-            if (pageNumber === 5) {
-                displayUserInfo();
-            }
-        }
-
-        function deleteCookies() {
-            localStorage.clear();
-            alert('All cookies have been deleted.');
-        }
-
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userInfo');
-            location.reload();
-        }
-
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            if (body.classList.contains('bg-white')) {
-                body.classList.remove('bg-white', 'text-gray-800');
-                body.classList.add('bg-gray-900', 'text-gray-100');
-            } else {
-                body.classList.remove('bg-gray-900', 'text-gray-100');
-                body.classList.add('bg-white', 'text-gray-800');
-            }
-        });
-        // Create pulsating screen effect and vibrate the phone.
-        function createPulsatingEffect() {
-            const body = document.body;
-            const pulseDiv = document.createElement('div');
-            pulseDiv.classList.add('pulse-effect');
-            body.appendChild(pulseDiv);
-
-            setTimeout(() => {
-                pulseDiv.remove();
-            }, 700); // Remove pulse effect after animation duration
-
-            // Vibrate the phone for 2 seconds
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-        }
-
-
-
-
-      
-    </script>
-
-    <script>
-      function openFullscreenModal(imageUrl) {
-        document.getElementById('fullscreen-modal').classList.remove('hidden');
-        document.getElementById('fullscreen-img').src = imageUrl;
-        document.getElementById('download-btn').setAttribute('href', imageUrl);
-        document.getElementById('download-btn').setAttribute('download', 'generated_image.png');
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
       }
-
-      function closeFullscreenModal() {
-        document.getElementById('fullscreen-modal').classList.add('hidden');
-        document.getElementById('fullscreen-img').src = '';
-      }
-    </script>
-
-
-  <!--script for chat-->
-
-  <script src="chatdt.js">
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
   </script>
-    <style>
-        .pulse-effect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            
-            z-index: 9999;
-            backdrop-filter: blur(32px);
-            animation: pulseEffect 0.7s ease-in-out;
-        }
-
-        @keyframes pulseEffect {
-            0% {
-                transform: scale(1);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0;
-            }
-        }
-    </style>
-  <script src="node_modules/@material-tailwind/html@latest/scripts/ripple.js"></script>
- 
-<!-- from cdn -->
-<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
-  <script src="node_modules/@material-tailwind/html@latest/scripts/dialog.js"></script>
- 
-<!-- from cdn -->
-<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
+
 </html>
